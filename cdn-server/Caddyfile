@@ -1,3 +1,0 @@
-cdn.haywood.ltd {
-    reverse_proxy localhost:3000
-}
