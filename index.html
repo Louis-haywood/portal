@@ -322,95 +322,116 @@ html, body {
 
 .search-go:hover { background: var(--accent-hot); }
 
-/* ─── LINK GRID ───────────────────────────────────────────────── */
+/* ─── QUICK BUTTONS ───────────────────────────────────────────── */
 
-.link-grid {
+.quick-grid {
   flex: 1;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  min-height: 420px;
 }
 
-.ls {
-  padding: 26px 30px;
+.qb {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 30px 36px 28px;
   border-right: 1px solid var(--rule);
   border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--text);
+  overflow: hidden;
+  transition: background 0.22s ease;
 }
 
-.ls:nth-child(3n) { border-right: none; }
+.qb:nth-child(2n)       { border-right: none; }
+.qb:nth-last-child(-n+2){ border-bottom: none; }
 
-/* last two cells: make last row right-border-less */
-.ls:nth-last-child(-n+3) { border-bottom: none; }
+.qb::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s ease;
+}
 
-.ls-head {
+.qb:not(.soon):hover            { background: var(--bg-2); }
+.qb:not(.soon):hover::after     { transform: scaleX(1); }
+
+.qb-top {
   display: flex;
-  align-items: baseline;
-  gap: 10px;
-  padding-bottom: 10px;
-  margin-bottom: 16px;
-  border-bottom: 1px solid var(--rule-bright);
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-.ls-num {
+.qb-num {
   font-family: var(--font-display);
-  font-size: 10px;
+  font-size: 11px;
   color: var(--accent);
   letter-spacing: 0.22em;
 }
 
-.ls-title {
-  font-family: var(--font-display);
-  font-size: 28px;
-  letter-spacing: 0.06em;
-  line-height: 1;
+.qb-badge {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--text-dim);
+  border: 1px solid var(--rule-bright);
+  padding: 2px 6px;
 }
 
-.ls ul {
-  list-style: none;
+.qb-center {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 1px;
+  justify-content: center;
+  padding: 20px 0 14px;
 }
 
-.ls ul a {
-  display: flex;
-  align-items: center;
-  gap: 0;
-  color: var(--text-mid);
-  text-decoration: none;
-  font-size: 12.5px;
-  padding: 5px 0;
-  transition: color 0.14s, padding-left 0.18s;
-  position: relative;
+.qb-name {
+  font-family: var(--font-display);
+  font-size: 80px;
+  line-height: 0.88;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
 }
 
-.ls ul a::before {
-  content: '—';
-  color: var(--rule-bright);
-  font-size: 9px;
-  margin-right: 8px;
-  flex-shrink: 0;
-  transition: color 0.14s;
-}
+.qb.soon .qb-name { color: var(--text-dim); }
 
-.ls ul a:hover { color: var(--text); padding-left: 5px; }
-.ls ul a:hover::before { color: var(--accent); }
-
-.tag {
-  font-size: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
+.qb-url {
+  font-size: 11px;
   color: var(--text-dim);
-  border: 1px solid var(--rule);
-  padding: 1px 4px;
-  margin-left: auto;
-  flex-shrink: 0;
-  transition: border-color 0.14s, color 0.14s;
+  margin-top: 12px;
+  letter-spacing: 0.04em;
+  transition: color 0.2s;
 }
 
-.ls ul a:hover .tag {
-  border-color: var(--rule-bright);
-  color: var(--text-mid);
+.qb:not(.soon):hover .qb-url { color: var(--text-mid); }
+
+.qb-bottom {
+  display: flex;
+  justify-content: flex-end;
 }
+
+.qb-arrow {
+  font-family: var(--font-display);
+  font-size: 36px;
+  color: var(--text-dim);
+  line-height: 1;
+  transition: color 0.2s, transform 0.22s;
+}
+
+.qb:not(.soon):hover .qb-arrow {
+  color: var(--accent);
+  transform: translate(5px, -2px);
+}
+
+.qb.soon { cursor: default; }
 
 /* ─── FOOTER ──────────────────────────────────────────────────── */
 
@@ -451,38 +472,27 @@ html, body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
-.ls {
+.qb {
   animation: riseIn 0.4s ease both;
 }
 
-.ls:nth-child(1) { animation-delay: 0.06s; }
-.ls:nth-child(2) { animation-delay: 0.12s; }
-.ls:nth-child(3) { animation-delay: 0.18s; }
-.ls:nth-child(4) { animation-delay: 0.24s; }
-.ls:nth-child(5) { animation-delay: 0.30s; }
-.ls:nth-child(6) { animation-delay: 0.36s; }
+.qb:nth-child(1) { animation-delay: 0.06s; }
+.qb:nth-child(2) { animation-delay: 0.12s; }
+.qb:nth-child(3) { animation-delay: 0.18s; }
+.qb:nth-child(4) { animation-delay: 0.24s; }
 
 /* ─── RESPONSIVE ──────────────────────────────────────────────── */
-
-@media (max-width: 860px) {
-  .link-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .ls:nth-child(3n)   { border-right: 1px solid var(--rule); }
-  .ls:nth-child(2n)   { border-right: none; }
-  .ls:nth-last-child(-n+3) { border-bottom: 1px solid var(--rule); }
-  .ls:nth-last-child(-n+2) { border-bottom: none; }
-}
 
 @media (max-width: 560px) {
   .portal-header { padding: 18px 20px 12px; }
   .portal-title  { font-size: 38px; }
   .clock         { font-size: 32px; }
   .search-bar    { padding: 16px 20px; }
-  .link-grid     { grid-template-columns: 1fr; }
-  .ls            { border-right: none !important; }
-  .ls:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule); }
-  .ls:last-child { border-bottom: none; }
+  .quick-grid    { grid-template-columns: 1fr; min-height: unset; }
+  .qb            { border-right: none !important; }
+  .qb:nth-last-child(-n+2) { border-bottom: 1px solid var(--rule); }
+  .qb:last-child { border-bottom: none; }
+  .qb-name       { font-size: 56px; }
   .numpad {
     grid-template-columns: repeat(3, 64px);
     grid-template-rows: repeat(4, 58px);
@@ -559,101 +569,65 @@ html, body {
     </form>
   </section>
 
-  <!-- LINKS -->
-  <main class="link-grid">
+  <!-- QUICK BUTTONS -->
+  <main class="quick-grid">
 
-    <!-- 01 WORK -->
-    <div class="ls">
-      <div class="ls-head">
-        <span class="ls-num">01</span>
-        <span class="ls-title">WORK</span>
+    <!-- 01 WEBSITE -->
+    <a class="qb" href="https://louishaywood.uk" target="_blank" rel="noopener">
+      <div class="qb-top">
+        <span class="qb-num">01</span>
+        <span class="qb-badge">personal</span>
       </div>
-      <ul>
-        <li><a href="https://mail.google.com" target="_blank" rel="noopener">Gmail <span class="tag">mail</span></a></li>
-        <li><a href="https://drive.google.com" target="_blank" rel="noopener">Google Drive <span class="tag">files</span></a></li>
-        <li><a href="https://calendar.google.com" target="_blank" rel="noopener">Calendar <span class="tag">cal</span></a></li>
-        <li><a href="https://notion.so" target="_blank" rel="noopener">Notion <span class="tag">notes</span></a></li>
-        <li><a href="https://docs.google.com" target="_blank" rel="noopener">Google Docs <span class="tag">docs</span></a></li>
-        <li><a href="https://sheets.google.com" target="_blank" rel="noopener">Google Sheets <span class="tag">data</span></a></li>
-      </ul>
-    </div>
+      <div class="qb-center">
+        <div class="qb-name">WEBSITE</div>
+        <div class="qb-url">louishaywood.uk</div>
+      </div>
+      <div class="qb-bottom">
+        <span class="qb-arrow">→</span>
+      </div>
+    </a>
 
-    <!-- 02 DEV -->
-    <div class="ls">
-      <div class="ls-head">
-        <span class="ls-num">02</span>
-        <span class="ls-title">DEV</span>
+    <!-- 02 GITHUB -->
+    <a class="qb" href="https://github.com/Louis-haywood" target="_blank" rel="noopener">
+      <div class="qb-top">
+        <span class="qb-num">02</span>
+        <span class="qb-badge">code</span>
       </div>
-      <ul>
-        <li><a href="https://github.com" target="_blank" rel="noopener">GitHub <span class="tag">code</span></a></li>
-        <li><a href="https://vercel.com" target="_blank" rel="noopener">Vercel <span class="tag">deploy</span></a></li>
-        <li><a href="https://developer.mozilla.org" target="_blank" rel="noopener">MDN Web Docs <span class="tag">ref</span></a></li>
-        <li><a href="https://stackoverflow.com" target="_blank" rel="noopener">Stack Overflow <span class="tag">help</span></a></li>
-        <li><a href="https://npmjs.com" target="_blank" rel="noopener">npm <span class="tag">pkg</span></a></li>
-        <li><a href="https://caniuse.com" target="_blank" rel="noopener">Can I Use <span class="tag">compat</span></a></li>
-      </ul>
-    </div>
+      <div class="qb-center">
+        <div class="qb-name">GITHUB</div>
+        <div class="qb-url">github.com/Louis-haywood</div>
+      </div>
+      <div class="qb-bottom">
+        <span class="qb-arrow">→</span>
+      </div>
+    </a>
 
-    <!-- 03 AI -->
-    <div class="ls">
-      <div class="ls-head">
-        <span class="ls-num">03</span>
-        <span class="ls-title">AI</span>
+    <!-- 03 QLAB OSC -->
+    <a class="qb" href="https://osc.louishaywood.uk/" target="_blank" rel="noopener">
+      <div class="qb-top">
+        <span class="qb-num">03</span>
+        <span class="qb-badge">live</span>
       </div>
-      <ul>
-        <li><a href="https://claude.ai" target="_blank" rel="noopener">Claude <span class="tag">anthropic</span></a></li>
-        <li><a href="https://chatgpt.com" target="_blank" rel="noopener">ChatGPT <span class="tag">openai</span></a></li>
-        <li><a href="https://gemini.google.com" target="_blank" rel="noopener">Gemini <span class="tag">google</span></a></li>
-        <li><a href="https://perplexity.ai" target="_blank" rel="noopener">Perplexity <span class="tag">search</span></a></li>
-        <li><a href="https://v0.dev" target="_blank" rel="noopener">v0 by Vercel <span class="tag">ui gen</span></a></li>
-      </ul>
-    </div>
+      <div class="qb-center">
+        <div class="qb-name">QLAB OSC</div>
+        <div class="qb-url">osc.louishaywood.uk</div>
+      </div>
+      <div class="qb-bottom">
+        <span class="qb-arrow">→</span>
+      </div>
+    </a>
 
-    <!-- 04 MEDIA -->
-    <div class="ls">
-      <div class="ls-head">
-        <span class="ls-num">04</span>
-        <span class="ls-title">MEDIA</span>
+    <!-- 04 CDN — not yet built -->
+    <div class="qb soon">
+      <div class="qb-top">
+        <span class="qb-num">04</span>
+        <span class="qb-badge">coming soon</span>
       </div>
-      <ul>
-        <li><a href="https://youtube.com" target="_blank" rel="noopener">YouTube <span class="tag">video</span></a></li>
-        <li><a href="https://open.spotify.com" target="_blank" rel="noopener">Spotify <span class="tag">music</span></a></li>
-        <li><a href="https://netflix.com" target="_blank" rel="noopener">Netflix <span class="tag">stream</span></a></li>
-        <li><a href="https://twitch.tv" target="_blank" rel="noopener">Twitch <span class="tag">live</span></a></li>
-        <li><a href="https://primevideo.com" target="_blank" rel="noopener">Prime Video <span class="tag">stream</span></a></li>
-      </ul>
-    </div>
-
-    <!-- 05 SOCIAL -->
-    <div class="ls">
-      <div class="ls-head">
-        <span class="ls-num">05</span>
-        <span class="ls-title">SOCIAL</span>
+      <div class="qb-center">
+        <div class="qb-name">CDN</div>
+        <div class="qb-url">cdn.louishaywood.uk</div>
       </div>
-      <ul>
-        <li><a href="https://x.com" target="_blank" rel="noopener">Twitter / X <span class="tag">social</span></a></li>
-        <li><a href="https://reddit.com" target="_blank" rel="noopener">Reddit <span class="tag">forums</span></a></li>
-        <li><a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn <span class="tag">work</span></a></li>
-        <li><a href="https://discord.com/app" target="_blank" rel="noopener">Discord <span class="tag">chat</span></a></li>
-        <li><a href="https://instagram.com" target="_blank" rel="noopener">Instagram <span class="tag">photo</span></a></li>
-        <li><a href="https://web.whatsapp.com" target="_blank" rel="noopener">WhatsApp Web <span class="tag">msg</span></a></li>
-      </ul>
-    </div>
-
-    <!-- 06 TOOLS -->
-    <div class="ls">
-      <div class="ls-head">
-        <span class="ls-num">06</span>
-        <span class="ls-title">TOOLS</span>
-      </div>
-      <ul>
-        <li><a href="https://maps.google.com" target="_blank" rel="noopener">Google Maps <span class="tag">nav</span></a></li>
-        <li><a href="https://translate.google.com" target="_blank" rel="noopener">Translate <span class="tag">lang</span></a></li>
-        <li><a href="https://bbc.co.uk/weather" target="_blank" rel="noopener">BBC Weather <span class="tag">forecast</span></a></li>
-        <li><a href="https://excalidraw.com" target="_blank" rel="noopener">Excalidraw <span class="tag">draw</span></a></li>
-        <li><a href="https://regex101.com" target="_blank" rel="noopener">Regex101 <span class="tag">regex</span></a></li>
-        <li><a href="https://squoosh.app" target="_blank" rel="noopener">Squoosh <span class="tag">img</span></a></li>
-      </ul>
+      <div class="qb-bottom"></div>
     </div>
 
   </main>
